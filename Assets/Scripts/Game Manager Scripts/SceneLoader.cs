@@ -133,4 +133,34 @@ public class SceneLoader : MonoBehaviour
         statsCanvas.gameObject.SetActive(!paused);
         reticleCanvas.gameObject.SetActive(!paused);
     }
+
+    public void LoadSandboxScene()
+    {
+        // Reset time scale before loading
+        Time.timeScale = 1;
+
+        // Unlock cursor before scene change
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneLoader.isPaused = false;
+
+        // Load the Sandbox scene
+        SceneManager.LoadScene("Sandbox");
+    }
+
+    public void LoadLevel3()
+    {
+        Debug.Log("Loading Level 3...");
+
+        // Сбрасываем всё важное
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Убеждаемся, что пауза выключена
+        isPaused = false;
+
+        // Загружаем сцену
+        SceneManager.LoadScene("Level3");
+    }
 }

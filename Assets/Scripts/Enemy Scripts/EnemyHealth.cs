@@ -11,10 +11,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-
         BroadcastMessage("OnDamageTaken");
 
         health -= damage;
+
+        // Звук получения урона (опционально, если хотите)
+        AudioManager.Instance?.PlayZombieHit();
+
         if (health <= 0)
         {
             KillEnemy();
@@ -27,6 +30,10 @@ public class EnemyHealth : MonoBehaviour
             return;
 
         isDead = true;
+
+        // Воспроизводим звук смерти
+        AudioManager.Instance?.PlayZombieDeath();
+
         GetComponent<Animator>().SetTrigger("Dead");
         GetComponent<EnemyAI>().enabled = false;
         StartCoroutine(DestroyEnemyObject());
@@ -37,5 +44,4 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
-
 }

@@ -68,12 +68,22 @@ public class Weapon : MonoBehaviour
         {
             HandleHitImpact(hit);
             DamageTarget(hit);
+
+            // Звук попадания по зомби
+            if (hit.transform.GetComponent<EnemyHealth>() != null)
+            {
+                AudioManager.Instance?.PlayZombieHit();
+            }
+
             Debug.Log("I hit " + hit.transform.name);
         }
         else
         {
             Debug.Log("I hit nothing");
         }
+
+        // Звук выстрела
+        AudioManager.Instance?.PlayShoot();
     }
 
     private void HandleHitImpact(RaycastHit hit)
