@@ -37,6 +37,101 @@ Shooting is implemented using `Physics.Raycast` — the standard Unity method fo
 | Pause | `Escape` |
 
 
+## 🧠 AI Behavior System
+
+Zombies use **NavMesh** pathfinding for navigation and a **state-based AI** system.
+
+### AI States:
+
+| State | Trigger | Behavior |
+|-------|---------|----------|
+| **Idle** | Default state | Zombie stands still, no action |
+| **Provoked** | Player gets within 5m OR zombie is shot | Zombie starts chasing player |
+| **Chase** | Provoked state active | Zombie moves toward player using NavMeshAgent |
+| **Attack** | Within stopping distance (2m) | Zombie plays attack animation, damages player |
+
+
+---
+
+## 🗺️ Level Overview
+
+The game features **3 playable levels**:
+
+### Level 1 – Sandbox (Practice)
+| Aspect | Description |
+|--------|-------------|
+| **Goal** | Test weapons and mechanics |
+| **Environment** | Open practice area |
+| **Enemies** | 3-5 stationary zombies |
+| **Difficulty** | Very easy |
+| **Win Condition** | No win condition (practice only) |
+
+### Level 2 – Survival Arena
+| Aspect | Description |
+|--------|-------------|
+| **Goal** | Eliminate all zombies |
+| **Environment** | Enclosed arena with obstacles |
+| **Enemies** | 10 zombies, spawn at start |
+| **Difficulty** | Medium |
+| **Win Condition** | Kill all zombies |
+| **Lose Condition** | Player dies |
+
+### Level 3 – Time Challenge
+| Aspect | Description |
+|--------|-------------|
+| **Goal** | Survive for 2 minutes against infinite zombies |
+| **Environment** | Open arena with 2 spawn points |
+| **Enemies** | Infinite spawning, max 10 at once |
+| **Difficulty** | Hard |
+| **Win Condition** | Survive until timer reaches zero AND all zombies are dead |
+| **Lose Condition** | Player dies OR timer expires with zombies alive |
+
+
+---
+
+## 🎨 Feedback Integration
+
+The game provides multiple feedback channels to keep the player informed.
+
+### Visual Feedback
+
+| Event | Feedback | Implementation |
+|-------|----------|----------------|
+| Player takes damage | Red screen flash | `DamageFlash` script with coroutine |
+| Player health changes | Health text updates | `TextMeshProUGUI` on StatsCanvas |
+| Ammo changes | Ammo text updates | Dynamic text per weapon type |
+| Pickup collected | Floating text (+10 Bullets) | `FloatingText` script with upward animation |
+| Zombie hit | Blood particle effect | Instantiated at hit point |
+| Zombie death | Death animation | Animator trigger |
+| Weapon fire | Muzzle flash particle | `ParticleSystem` on weapon |
+| Level completion | Victory panel | UI panel with buttons |
+| Player death | Game over panel | UI panel with restart option |
+
+### Audio Feedback
+
+| Event | Sound Effect | Source |
+|-------|--------------|--------|
+| Weapon shoot | Gunfire sound | `AudioManager.PlayShoot()` |
+| Zombie hit | Impact sound | `AudioManager.PlayZombieHit()` |
+| Zombie death | Death groan | `AudioManager.PlayZombieDeath()` |
+| Player damage | Hurt sound | `AudioManager.PlayDamage()` |
+| Ammo pickup | Pickup sound | `AudioManager.PlayPickup()` |
+| Footsteps | Step sounds (randomized) | `AudioManager.PlayFootstep()` |
+| Background | Ambient music | `AudioManager` (looping) |
+
+### UI Feedback
+
+| Element | Location | Purpose |
+|---------|----------|---------|
+| Health text | StatsCanvas (top-left) | Shows current HP |
+| Ammo text | StatsCanvas (bottom-right) | Shows current ammo per weapon |
+| Timer text | StatsCanvas (top-right) | Shows remaining time (Level 3 only) |
+| Reticle | ReticleCanvas (center) | Aiming crosshair |
+| Pause menu | PauseCanvas | Resume, Restart, Quit options |
+| Win panel | GameCompleteCanvas | Victory screen with restart/menu |
+| Lose panel | GameOverCanvas | Defeat screen with restart/menu |
+
+
 ## 🛠️ Built With
 
 - Unity 6000.3.1f1
