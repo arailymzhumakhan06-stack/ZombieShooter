@@ -62,7 +62,7 @@ The game features **3 playable levels**:
 |--------|-------------|
 | **Goal** | Test weapons and mechanics |
 | **Environment** | Open practice area |
-| **Enemies** | 3-5 stationary zombies |
+| **Enemies** | 1 stationary zombie |
 | **Difficulty** | Very easy |
 | **Win Condition** | No win condition (practice only) |
 
@@ -71,7 +71,7 @@ The game features **3 playable levels**:
 |--------|-------------|
 | **Goal** | Eliminate all zombies |
 | **Environment** | Enclosed arena with obstacles |
-| **Enemies** | 10 zombies, spawn at start |
+| **Enemies** | Zombies spawn at start |
 | **Difficulty** | Medium |
 | **Win Condition** | Kill all zombies |
 | **Lose Condition** | Player dies |
